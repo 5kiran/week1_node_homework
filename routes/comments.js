@@ -17,9 +17,19 @@ router.post("/:_postid", async (req,res) => {
     res.status(400).json({"message": "데이터 형식이 올바르지 않습니다."})
   }
 
-
-  res.json({'msg':"온다"})
+  res.json({'message':"댓글을 생성하였습니다."})
 })
 
+router.get("/:_postid", async (req,res) => {
+  try{
+    const {_postid:posts} = req.params;
+    console.log(req.params)
+    const comments = await Comments.find({postid:posts})
+    res.json({comments})
+  }
+  catch{
+    res.status(400).json({"message":"데이터 형식이 올바르지 않습니다."})
+  }
+})
 
 module.exports = router;

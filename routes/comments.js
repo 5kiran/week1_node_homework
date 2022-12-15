@@ -27,7 +27,7 @@ router.post("/:_postid", async (req,res) => {
 router.get("/:_postid", async (req,res) => {
   try{
     const {_postid:posts} = req.params;
-    const comments = await Comments.find({postid:posts})
+    const comments = await Comments.find({postid:posts},{'password':false,'__v':false,'updatedAt':false}).sort({createdAt:-1});
     res.json({comments})
   }
   catch{

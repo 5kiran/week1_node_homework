@@ -19,7 +19,7 @@ router.post("/", async (req,res) => {
 
 // 게시글 목록 API
 router.get("/", async (req,res) => {
-  const posts = await Posts.find({},{'__v':false,'updatedAt':false}).sort({createdAt:-1});
+  const posts = await Posts.find({},{'password':false,'__v':false,'updatedAt':false}).sort({createdAt:-1});
   res.json({posts});
 })
 

@@ -4,6 +4,7 @@ const router = express.Router();
 const Posts = require("../schemas/posts.js");
 const Comments = require("../schemas/comments.js")
 
+// 게시글 작성 API
 router.post("/", async (req,res) => {
   try {
     const {user, password, title, content} = req.body;
@@ -15,11 +16,15 @@ router.post("/", async (req,res) => {
   };
 })
 
+
+// 게시글 목록 API
 router.get("/", async (req,res) => {
   const posts = await Posts.find({},{'__v':false,'updatedAt':false});
   res.json({posts});
 })
 
+
+// 게시글 상세 조회 API
 router.get("/:_id", async (req,res) => {
   try {
     const {_id} = req.params;
@@ -35,6 +40,8 @@ router.get("/:_id", async (req,res) => {
   };
 })
 
+
+// 게시글 수정 API
 router.put("/:_id", async (req,res) => {
   try {
     const {_id} = req.params;
@@ -59,6 +66,8 @@ router.put("/:_id", async (req,res) => {
   }
 })
 
+
+// 게시글 삭제 API
 router.delete("/:_id", async (req,res) => {
   try {
     const {_id} = req.params;

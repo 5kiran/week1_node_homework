@@ -42,11 +42,6 @@
     └── post.js
 ```
 
-# DB Schema
-<img src="./markdown/images/posts_api_db_schema.jpg" width="90%" title="posts_api_db_schema.jpg"></img>
-
-# API 명세서
-<img src="./markdown/images/posts_api_명세서.png" width="90%" title="posts_api_명세서.png"></img>
 
 # 구현 중 겪은 어려운 부분
 #### * Schema 세팅에서 작성시간 자동 저장되게 하는 법

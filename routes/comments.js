@@ -4,6 +4,8 @@ const router = express.Router();
 const Posts = require("../schemas/posts.js");
 const Comments = require("../schemas/comments.js")
 
+
+// 댓글 작성 API
 router.post("/:_postid", async (req,res) => {
   try{
     const {_postid:postid} = req.params;
@@ -20,10 +22,11 @@ router.post("/:_postid", async (req,res) => {
   res.json({'message':"댓글을 생성하였습니다."})
 })
 
+
+// 댓글 보기 API
 router.get("/:_postid", async (req,res) => {
   try{
     const {_postid:posts} = req.params;
-    console.log(req.params)
     const comments = await Comments.find({postid:posts})
     res.json({comments})
   }
@@ -32,4 +35,31 @@ router.get("/:_postid", async (req,res) => {
   }
 })
 
+
+// 댓글 수정 API
+router.put("/:commentId", async (req,res) => {
+  try {
+    const {commentId} = req.params;
+    const {password, content} = req.body;
+    console.log(commentId,password,content)
+    const find = await Comments.find({_id : commentId})
+    console.log(find)
+
+    if(content === undefined){
+      return res.status(400).json({"message": "내용을 입력해주세요."});
+    };
+    if (find[0].password === password){
+      await Comments.updateOne(
+        {_id: commentId},
+        {$set : {content:content}}
+        )
+      res.json({"message": "댓글을 수정하였습니다."})
+    }else{
+      res.status(403).json({"message": "비밀번호가 틀렸습니다."})
+    }
+  }
+  catch (err) {
+    res.status(404).json({"message": "존재하지 않는 댓글입니다."})
+  }
+})
 module.exports = router;

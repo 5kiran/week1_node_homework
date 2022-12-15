@@ -19,7 +19,7 @@ router.post("/", async (req,res) => {
 
 // 게시글 목록 API
 router.get("/", async (req,res) => {
-  const posts = await Posts.find({},{'__v':false,'updatedAt':false});
+  const posts = await Posts.find({},{'__v':false,'updatedAt':false}).sort({createdAt:-1});
   res.json({posts});
 })
 
@@ -29,7 +29,7 @@ router.get("/:_id", async (req,res) => {
   try {
     const {_id} = req.params;
     let [result] = await Posts.find({_id},{'password':false,'__v':false,'updatedAt':false});
-    let comments = await Comments.find({postid:_id},{'_id':false,'password':false,'__v':false,'updatedAt':false})
+    let comments = await Comments.find({postid:_id},{'_id':false,'password':false,'__v':false,'updatedAt':false}).sort({createdAt:-1});
     let postData = {};
     postData.post = result
     postData.comments = comments

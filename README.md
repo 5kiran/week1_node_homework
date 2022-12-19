@@ -41,13 +41,3 @@
     ├── comment.js
     └── post.js
 ```
-
-
-# 구현 중 겪은 어려운 부분
-#### * Schema 세팅에서 작성시간 자동 저장되게 하는 법
-> set timestamps 옵션을 주어 createdAt field를 자동 생성되게 함. [링크][def]
-#### * EC2 서버 재가동 후 MongoDB 실행 안되는 문제
-> 권한 문제로 파악되어 문제가 되는 파일 삭제 후 재실행 함으로 해결. [링크][def2]
-
-[def]: https://4sii.tistory.com/195
-[def2]: https://4sii.tistory.com/203
